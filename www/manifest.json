@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "e-class Calendar Addon",
+  "version": "1.0.0",
+  "description": "同志社大学の情報システム「e-class」のカレンダー機能を強化します",
+  "author": "ヴォルガ・クルヴァール",
+  "content_scripts": [
+    {
+      "matches": ["*://eclass.doshisha.ac.jp/webclass/*"],
+      "js": ["index.js"]
+    }
+  ],
+  "applications": {
+    "gecko": {
+      "id": "kurvan1112@gmail.com",
+      "update_url": "https://tawataso.com/gakujoaddon/updates.json"
+    }
+  }
+}

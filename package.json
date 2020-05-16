@@ -1,0 +1,18 @@
+{
+  "name": "e-class-calendar-addon",
+  "version": "1.0.0",
+  "description": "同志社大学の情報システム「e-class」のカレンダー機能を強化します",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "webpack": "webpack"
+  },
+  "author": "ヴォルガ・クルヴァール",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}

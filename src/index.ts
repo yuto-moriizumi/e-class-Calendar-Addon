@@ -38,6 +38,9 @@ class Main {
       element.appendChild(duetLink);
     }
 
+    //チェックボックス用のスタイルタグを追加
+    Main.addStyleTag(Main.CSS_CHECKBOX);
+
     //授業カレンダーに各サービスの登録ボタン/アクセスボタンを設置
     const tds = document.querySelectorAll(
       "table.schedule-table > tbody > tr > td"
@@ -113,18 +116,23 @@ class Main {
             break;
           case SERVICE_TYPE.CHECK:
             const label = document.createElement("label");
-            label.innerText = service;
             td.appendChild(label);
 
             const checkbox = document.createElement("input");
             checkbox.type = "checkbox";
             checkbox.checked = classInfo[service];
-            label.appendChild(checkbox);
-
+            checkbox.classList.add("checkbox-input");
             checkbox.onchange = () => {
               classInfo[service] = checkbox.checked;
               localStorage.setItem(classId, JSON.stringify(classInfo));
             };
+            label.appendChild(checkbox);
+
+            const span = document.createElement("span");
+            span.innerText = service;
+            span.classList.add("checkbox-parts");
+            label.append(span);
+
             break;
           case SERVICE_TYPE.TEXT:
             if (td.classList[0] != "blank") break;
@@ -184,6 +192,48 @@ class Main {
       element.innerHTML = css;
     }
   }
+
+  private static addStyleTag(css: string) {
+    const styleTag = document.createElement("style");
+    styleTag.innerHTML = css;
+    document.getElementsByTagName("head")[0].appendChild(styleTag);
+  }
+
+  private static CSS_CHECKBOX = `
+  .checkbox-input{
+    display: none;
+  }
+  .checkbox-parts{
+    padding-left: 20px;
+    position:relative;
+    margin-right: 20px;
+  }
+  .checkbox-parts::before{
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #999;
+    border-radius: 4px;
+  }
+  .checkbox-input:checked + .checkbox-parts{
+    color: #d01137;
+  }
+  .checkbox-input:checked + .checkbox-parts::after{
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    width: 7px;
+    height: 14px;
+    transform: rotate(40deg);
+    border-bottom: 3px solid #d01137;
+    border-right: 3px solid #d01137;
+  }`;
 }
 
 try {

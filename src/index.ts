@@ -1,27 +1,9 @@
+import Services from "./Services";
+import UIType from "./UIType";
+import Button from "./Button";
+
 class Main {
   constructor() {
-    enum SERVICE_TYPE {
-      LINK, //ボタンを表示し、新しいタブでリンクを開きます
-      CHECK, //チェックボックスを表示します
-      TEXT, //テキストを登録して表示できます
-    }
-    const SERVICE_LIST = {
-      //サービスのリスト　ここに文字列を追加すると登録できるサービスを増やせる
-
-      class: {
-        type: SERVICE_TYPE.TEXT,
-      },
-      zoom: {
-        type: SERVICE_TYPE.LINK,
-      },
-      teams: {
-        type: SERVICE_TYPE.LINK,
-      },
-      duet: {
-        type: SERVICE_TYPE.CHECK,
-      },
-    };
-
     //「Duetへアクセス」リンクを表題に追加する
     const h4s = document.getElementsByTagName("h4");
     for (let i = 0; i < h4s.length; i++) {
@@ -69,52 +51,18 @@ class Main {
       if (classInfo == null) classInfo = {};
 
       //データ形式の整合性を取る
-      Object.keys(SERVICE_LIST).forEach((service) => {
+      Object.keys(Services).forEach((service) => {
         if (classInfo[service] == undefined) classInfo[service] = null;
       });
       console.log(classInfo);
 
       //各サービスのボタンを追加する
-      Object.keys(SERVICE_LIST).forEach((service) => {
-        switch (SERVICE_LIST[service].type) {
-          case SERVICE_TYPE.LINK:
-            //Object.getOwnPropertyNames(SERVICE_LIST).find();
-            const link = classInfo[service];
-            //サービスへのリンクを追加
-            if (link == null) {
-              //未登録の場合
-              const button = Main.createButton(
-                service + "登録",
-                () => {},
-                "lightgray"
-              );
-              button.onclick = () => {
-                const url = prompt(service + "のURLを入力");
-                classInfo[service] = url;
-                localStorage.setItem(classId, JSON.stringify(classInfo));
-                button.remove();
-                td.appendChild(
-                  Main.createButton(
-                    service + "アクセス",
-                    () => Main.openTab(classInfo[service]),
-                    "lightgreen"
-                  )
-                );
-                return;
-              };
-              td.appendChild(button);
-            } else {
-              //登録済みの場合
-              td.appendChild(
-                Main.createButton(
-                  service + "アクセス",
-                  () => Main.openTab(classInfo[service]),
-                  "lightgreen"
-                )
-              );
-            }
+      Object.keys(Services).forEach((service) => {
+        switch (Services[service].type) {
+          case UIType.LINK:
+            td.appendChild(new Button(classId, service).getElement());
             break;
-          case SERVICE_TYPE.CHECK:
+          case UIType.CHECK:
             const label = document.createElement("label");
             td.appendChild(label);
 
@@ -134,7 +82,7 @@ class Main {
             label.append(span);
 
             break;
-          case SERVICE_TYPE.TEXT:
+          case UIType.TEXT:
             if (td.classList[0] != "blank") break;
 
             const text = document.createElement("p");

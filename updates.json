@@ -1,0 +1,12 @@
+{
+  "addons": {
+    "{d380e113-87f4-42b2-a5fc-1015d4b4c9e6}": {
+      "updates": [
+        {
+          "version": "1.0.0",
+          "update_link": "http://volga.e3.valueserver.jp/e-class_Calendar_Addon/extension.xpi"
+        }
+      ]
+    }
+  }
+}

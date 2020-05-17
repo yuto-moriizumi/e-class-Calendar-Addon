@@ -4,6 +4,11 @@
   "version": "1.0.0",
   "description": "同志社大学の情報システム「e-class」のカレンダー機能を強化します",
   "author": "ヴォルガ・クルヴァール",
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  },
   "content_scripts": [
     {
       "matches": ["*://eclass.doshisha.ac.jp/webclass/*"],
@@ -12,8 +17,7 @@
   ],
   "applications": {
     "gecko": {
-      "id": "kurvan1112@gmail.com",
-      "update_url": "https://tawataso.com/gakujoaddon/updates.json"
+      "update_url": "https://sites.google.com/site/shinrinrepublic/updates.json"
     }
   }
 }

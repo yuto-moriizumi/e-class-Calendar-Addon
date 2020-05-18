@@ -107,39 +107,6 @@ class Main {
       Object.keys(classInfo).forEach((service) => {});
     });
   }
-  private static openTab(url) {
-    const link = document.createElement("a");
-    link.setAttribute("target", "_blank");
-    link.setAttribute("href", url);
-    link.click();
-    return;
-  }
-
-  private static createButton(text, callback, bgColor) {
-    const button = document.createElement("button");
-    //button.type = "button";
-    button.innerText = text;
-    button.style.backgroundColor = bgColor;
-    button.onclick = (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      callback();
-    };
-    return button;
-  }
-
-  private static pseudo(id: string, css: string) {
-    id = id + "-pseudoStyle";
-    const element = document.getElementById(id);
-    if (element == null) {
-      const styleTag = document.createElement("style");
-      styleTag.id = id;
-      styleTag.innerHTML = css;
-      document.getElementsByTagName("head")[0].appendChild(styleTag);
-    } else {
-      element.innerHTML = css;
-    }
-  }
 
   private static addStyleTag(css: string) {
     const styleTag = document.createElement("style");

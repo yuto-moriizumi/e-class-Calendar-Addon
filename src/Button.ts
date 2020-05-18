@@ -1,5 +1,3 @@
-import UIType from "./UIType";
-
 export default class Button {
   private element: HTMLElement;
   private button: HTMLButtonElement;
@@ -7,7 +5,13 @@ export default class Button {
   private serviceId: string;
   private classInfo: any;
   private xButton: HTMLElement;
-  
+
+  /**
+   *Creates an instance of Button.
+   * @param {string} classId ローカルストレージに保存する際にキーとして使用する講義ID
+   * @param {string} serviceId ローカルストレージに保存する際にキーとして使用するサービス名称
+   * @memberof Button
+   */
   constructor(classId: string, serviceId: string) {
     this.classId = classId;
     this.serviceId = serviceId;
@@ -30,9 +34,20 @@ export default class Button {
       this.setStateAvailable();
     }
   }
-  public getElement() {
+  /**
+   * 構築されたdiv要素を返します
+   * @returns {HTMLElement}
+   * @memberof Button
+   */
+  public getElement(): HTMLElement {
     return this.element;
   }
+
+  /**
+   * リンクが有効な状態にします
+   * @private
+   * @memberof Button
+   */
   private setStateAvailable() {
     this.button.innerText = this.serviceId + "へ";
     this.button.style.backgroundColor = "lightgreen";
@@ -53,6 +68,11 @@ export default class Button {
     };
     this.element.appendChild(this.xButton);
   }
+  /**
+   * リンクが無効な状態にします
+   * @private
+   * @memberof Button
+   */
   private setStateUnavailable() {
     this.button.innerText = this.serviceId + "登録";
     this.button.style.backgroundColor = "lightgrey";
